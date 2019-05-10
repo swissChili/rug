@@ -8,7 +8,7 @@
 
 #include "SFML/Graphics.hpp"
 
-void eventLoop()
+void eventLoop(map gameMap)
 {
   double posX = 22, posY = 12;
   double dirX = -1, dirY = 0;
@@ -106,7 +106,7 @@ void eventLoop()
           side = 1;
         }
         // ' ' is empty, anything else is a wall.
-        if (worldMap[mapX][mapY] != ' ')
+        if (gameMap[mapX][mapY] != ' ')
           hasHit = true;
       }
 
@@ -130,7 +130,7 @@ void eventLoop()
         drawEnd = h - 1;
 
 
-      sf::Color color = chooseColor(worldMap[mapX][mapY]);
+      sf::Color color = chooseColor(gameMap[mapX][mapY]);
 
       // set 2 of the sides of the box to a darker color
       if (side == 1) color.a -= 60;
@@ -139,7 +139,7 @@ void eventLoop()
     }
 
     // render a minimap/radar to the screen
-    radar(win, posX, posY);
+    radar(gameMap, win, posX, posY);
 
     double currentTime = clock.restart().asSeconds();
     double fps = currentTime - lastTime;
@@ -152,7 +152,7 @@ void eventLoop()
 
     window.display();
 
-    if (handleKeystrokes(&posX, &posY, &dirX, &dirY, &planeX, &planeY, fps, worldMap))
+    if (handleKeystrokes(&posX, &posY, &dirX, &dirY, &planeX, &planeY, fps, gameMap))
       window.close();
   }
 }

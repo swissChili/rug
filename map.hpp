@@ -27,13 +27,13 @@ map defaultMap =
   "       4  4  3         1",
   "      4  4    33 3 3 3 1",
   "     4  4      3       1",
-  "    4  4       3   33331",
-  "   4  4        3   3   1",
-  "  4  4         3   3   1",
-  " 4  4           3   3  1",
-  " 4 455555 4      3   331",
-  " 4 4      4       3   31",
-  " 4        4        3  31",
+  "    4  4       3   3333 ",
+  "   4  4        3   3    ",
+  "  4  4         3   3    ",
+  " 4  4           3   3   ",
+  " 4 455555 4      3   3  ",
+  " 4 4      4       3   3 ",
+  " 4        4        3  3 ",
   " 4 4      4            1",
   " 4 44444444            1",
   " 4                     1",
@@ -41,6 +41,24 @@ map defaultMap =
   "         1111111111111  "
 };
 
-#define worldMap defaultMap
+
+void fromFile(map foo, std::string f)
+{
+  std::cout << "Reading map file " << f << std::endl;
+  std::ifstream in(f);
+  std::string file;
+  for (int i = 0; std::getline(in, file); ++i)
+  {
+    if (file.length() != mapWidth - 1)
+    {
+      std::cerr << "Line has length " << file.length() << " should have length " << mapWidth << '\n';
+      throw "wrong line length";
+    }
+    strcpy(foo[i], file.c_str());
+    std::cout << foo[i] << std::endl;
+  }
+  //return std::make_shared<map>(defaultMap);
+}
+
 
 #endif

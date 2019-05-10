@@ -7,16 +7,16 @@
 
 static float tileScale = 10.0;
 
-void radar(sf::RenderWindow *win, double posX, double posY)
+void radar(map gameMap, sf::RenderWindow *win, double posX, double posY)
 {
   for (int i = 0; i < mapHeight; ++i)
   {
     for (int j = 0; j < mapWidth; ++j)
     {
       // Skip EOF and empty cells
-      if (worldMap[i][j] != 0)
+      if (gameMap[i][j] != 0)
       {
-        sf::Color c = chooseColor(worldMap[i][j]);
+        sf::Color c = chooseColor(gameMap[i][j]);
         sf::VertexArray box(sf::Quads, 4);
         box[0].position = sf::Vector2f(tileScale * j, tileScale * i);
         box[1].position = sf::Vector2f(tileScale * j, tileScale * i + tileScale);
