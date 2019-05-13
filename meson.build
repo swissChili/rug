@@ -1,5 +1,13 @@
 project('rug', 'cpp')
 
 sfml = dependency('sfml-graphics')
+sources = [
+  'src/main.cpp',
+  'src/keys.hpp',
+  'src/loop.hpp',
+  'src/map.hpp',
+  'src/radar.hpp',
+  'src/render.hpp'
+]
 
-executable('rug', ['main.cpp', 'map.hpp', 'keys.hpp', 'loop.hpp', 'render.hpp'], dependencies: sfml)
+executable('rug', sources, dependencies: sfml)
